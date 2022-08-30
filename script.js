@@ -148,3 +148,23 @@ console.log(currnenciesUnique);
 currnenciesUnique.forEach(function (value, _, map) {
   console.log(`${value}: ${value}`);
 });
+
+//Map
+const movements = [1000, -100, 500, 200, 100];
+const euroToUsd = 1.1;
+const movementsUSD = movements.map(move => move * euroToUsd);
+console.log(movements);
+console.log(movementsUSD);
+const movementsUsdfor = [];
+for (const mov of movements) {
+  movementsUsdfor.push(mov * euroToUsd);
+}
+console.log(movementsUsdfor);
+
+const movementsDescriptions = movements.map(
+  (mov, i) =>
+    `Movement ${i + 1}: You ${mov > 0 ? `deposited` : `withdrew`} ${Math.abs(
+      mov
+    )}`
+);
+console.log(movementsDescriptions);
