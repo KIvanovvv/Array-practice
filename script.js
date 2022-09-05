@@ -168,3 +168,13 @@ const movementsDescriptions = movements.map(
     )}`
 );
 console.log(movementsDescriptions);
+
+//Equality check
+console.log(movements);
+console.log(movements.includes(-130));
+
+//Condition check
+// console.log(movements.some(mov => mov === -130));
+
+const anyDeposits = movements.some(mov => mov > 1500);
+console.log(anyDeposits);
