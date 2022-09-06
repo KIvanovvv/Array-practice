@@ -241,3 +241,101 @@ movements.sort((a, b) => a - b);
 movements.sort((a, b) => b - a);
 
 console.log(movements);
+
+//Array.from
+const y = Array.from({ length: 7 }, () => 1);
+console.log(y);
+
+const z = Array.from({ length: 7 }, (_, i) => i + 1);
+console.log(z);
+
+const random = Array.from(
+  { length: 100 },
+  () => Math.trunc(Math.random() * 100) + 1
+);
+console.log(random);
+
+labelBalance.addEventListener(`click`, function () {
+  const movementsUI = Array.from(
+    document.querySelectorAll(`.movements__value`),
+    el => Number(el.textContent.replace(`€`, ``))
+  );
+  console.log(movementsUI);
+
+  const movementsUI2 = [...document.querySelectorAll(`.movements__value`)];
+  console.log(movementsUI2);
+});
+
+const arr1 = [1, 2, 3, 4, 5, 6, 7];
+
+//Empty arrays + fill Method
+const x = new Array(7);
+console.log(x);
+// console.log(x.map(() => 5));
+
+x.fill(1, 3, 5);
+console.log(x);
+arr.fill(23, 2, 6);
+console.log(arr1);
+///////////////////////////////////////////
+//Array Method practice
+
+//1
+const bankDepositSum = accounts
+  .flatMap(acc => acc.movements)
+  .filter(mov => mov > 0)
+  .reduce((acc, mov) => acc + mov, 0);
+
+console.log(bankDepositSum);
+
+//2
+// const numDeposits1000 = accounts
+//   .flatMap(acc => acc.movements)
+//   .filter(mov => mov >= 1000).length;
+// console.log(numDeposits1000);
+
+// const numDeposits1000 = accounts
+//   .flatMap(acc => acc.movements)
+//   .reduce((count, cur) => (cur >= 1000 ? count+1 : count), 0);
+// console.log(numDeposits1000);
+
+const numDeposits1000 = accounts
+  .flatMap(acc => acc.movements)
+  .reduce((count, cur) => (cur >= 1000 ? ++count : count), 0);
+console.log(numDeposits1000);
+
+//Prexied ++ operator
+let a = 10;
+console.log(a++);
+console.log(a);
+
+//3
+const { deposit, withdraw } = accounts
+  .flatMap(acc => acc.movements)
+  .reduce(
+    (sums, cur) => {
+      // cur > 0 ? (sums.deposit += cur) : (sums.withdraw += cur);
+      sums[cur > 0 ? `deposit` : `withdraw`] += cur;
+      return sums;
+    },
+    { deposit: 0, withdraw: 0 }
+  );
+
+console.log(deposit, withdraw);
+
+//4
+
+const convertTitleCase = function (title) {
+  const capitalize = str => str[0].toUpperCase() + str.slice(1);
+  const exeptions = [`a`, `an`, `and`, `the`, `but`, `or`, `on`, `in`, `with`];
+
+  const titleCase = title
+    .toLowerCase()
+    .split(' ')
+    .map(el => (exeptions.includes(el) ? el : capitalize(el)))
+    .join(' ');
+  return capitalize(titleCase);
+};
+console.log(convertTitleCase(`this is a nice title`));
+console.log(convertTitleCase(`this is a LONG title but not too long`));
+console.log(convertTitleCase(`and here is another title with an EXAMPLE`));
